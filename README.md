@@ -40,7 +40,7 @@ Jean - Samuel BOURGUIT
 Administrateur Infrastuture et Cloud
 
 ## License
-Copyright [2023] [Jean - Samuel BOURGUIT]
+Copyright 2023 Jean - Samuel BOURGUIT
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
