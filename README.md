@@ -1,7 +1,5 @@
-# NTP_Server_Install_Project
-Install and Configure Linux NTP Server 
 
-# Wordpress-Backup-Script
+# NTP-Server-Install-Script
 
 # ntp_server_install.bash
 
