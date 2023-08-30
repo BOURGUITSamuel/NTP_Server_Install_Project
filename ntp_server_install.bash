@@ -30,20 +30,20 @@ log_error() {
 
 # Vérification si le serveur NTP est déjà installé
 check_ntp_installed() {
-  dpkg -s ntp ntpdate > /dev/null 2>&1
+  dpkg -s ntpsec ntpdate > /dev/null 2>&1
 }
 
 # Installation du serveur NTP
 install_ntp() {
   echo "Installation du serveur NTP..." | tee -a "$LOG_FILE"
   apt-get -y update > /dev/null
-  apt-get -y install ntp ntpdate > /dev/null
+  apt-get -y install ntpsec ntpdate > /dev/null
 }
 
 # Vérification de la réussite de l'installation de NTP
 check_ntp_installation_success() {
   echo "Vérification de l'installation du serveur NTP..." | tee -a "$LOG_FILE"
-  if dpkg -s ntp > /dev/null 2>&1; then
+  if dpkg -s ntpsec > /dev/null 2>&1; then
     echo "L'installation du serveur NTP a réussi." | tee -a "$LOG_FILE"
   else
     log_error "L'installation du serveur NTP a échoué."
@@ -93,13 +93,13 @@ check_ntp_connectivity() {
 # Activation du NTP au démarrage du système
 enable_ntp_at_startup() {
   echo "Activation du service NTP au démarrage du système..." | tee -a "$LOG_FILE"
-  systemctl enable ntp 2> /dev/null
+  systemctl enable ntpsec 2> /dev/null
 }
 
 # Vérification de l'activation du NTP
 check_ntp_enabled() {
   echo "Vérification de l'activation du service NTP..." | tee -a "$LOG_FILE"
-  if ! systemctl is-enabled ntp > /dev/null; then
+  if ! systemctl is-enabled ntpsec > /dev/null; then
     log_error "Le service NTP n'est pas activé au démarrage du système."
   else
     echo "Le service NTP a bien été activé au démarrage du système." | tee -a "$LOG_FILE"
@@ -109,13 +109,13 @@ check_ntp_enabled() {
 # Redémarrage du service NTP
 restart_ntp_service() {
   echo "Redémarrage du service NTP..." | tee -a "$LOG_FILE"
-  systemctl restart ntp > /dev/null
+  systemctl restart ntpsec > /dev/null
 }
 
 # Vérification du redémarrage du service NTP
 check_ntp_service_status() {
   echo "Vérification du redémarrage du service NTP..." | tee -a "$LOG_FILE"
-  if ! systemctl is-active ntp > /dev/null; then
+  if ! systemctl is-active ntpsec > /dev/null; then
     log_error "Le service NTP n'a pas redémarré correctement."
   else
     echo "Le service NTP a bien redémarré." | tee -a "$LOG_FILE"
