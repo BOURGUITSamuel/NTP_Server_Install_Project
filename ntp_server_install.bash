@@ -7,9 +7,6 @@ current_date=$(date '+%Y-%m-%d')
 LOG_FILE="ntp_setup.log"
 
 # Emplacement du fichier de configuration NTP
-#debian 11
-#NTP_CONF_FILE="/etc/ntp.conf"
-#debian 12
 NTP_CONF_FILE="/etc/ntpsec/ntp.conf"
 
 # Emplacement du fichier de sauvegarde 
