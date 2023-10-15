@@ -4,7 +4,7 @@
 current_date=$(date '+%Y-%m-%d')
 
 # Emplacement du fichier log
-LOG_FILE="ntp_setup.log"
+LOG_FILE="/var/log/ntp_setup.log"
 
 # Emplacement du fichier de configuration NTP
 NTP_CONF_FILE="/etc/ntpsec/ntp.conf"
@@ -15,14 +15,17 @@ NTP_BACKUP_DIR="/etc/ntp_backup"
 # Vérification si l'utilisateur est root
 check_root_user() {
   if [[ $EUID -ne 0 ]]; then
-    echo "Ce script doit être exécuté en tant que root."
-    exit 1
+    log_error "Ce script doit être exécuté en tant que root."
   fi
 }
 
 # Fonction pour la gestion des erreurs
-log_error() {
-  echo "$(date '+%Y-%m-%d %H:%M:%S') - Erreur: $1" >> "$LOG_FILE" 2>> "$LOG_FILE"
+function log_error {
+    local MESSAGE="$1"
+    local TIMESTAMP=$(date +'%Y-%m-%d %H:%M:%S')
+    echo "ERREUR [$TIMESTAMP]: $MESSAGE" >&2
+    echo "ERREUR [$TIMESTAMP]: $MESSAGE" >> "$log_file"
+    exit 1
 }
 
 # Vérification si le serveur NTP est déjà installé
@@ -44,7 +47,6 @@ check_ntp_installation_success() {
     echo "L'installation du serveur NTP a réussi." | tee -a "$LOG_FILE"
   else
     log_error "L'installation du serveur NTP a échoué."
-    exit1
   fi
 }
 
