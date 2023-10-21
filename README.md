@@ -17,7 +17,7 @@ Le programme a été conçu avec le language Bash
 
 ## Installing & Using
 
-1- Copiez le fichier dans le répertoire de votre choix
+1- Copiez le  programme dans le répertoire de votre choix
 
 2- Lancez le programme avec la commande suivante : "bash ntp_server_install.bash"
 
