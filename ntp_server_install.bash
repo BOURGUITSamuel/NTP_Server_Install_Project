@@ -12,15 +12,6 @@ NTP_CONF_FILE="/etc/ntpsec/ntp.conf"
 # Emplacement du fichier de sauvegarde 
 NTP_BACKUP_DIR="/etc/ntp_backup"
 
-# Vérification des privilèges de l'utilisateur
-check_root_user() {
-  if [[ $EUID -ne 0 ]]; then
-    log_error "Ce script doit être exécuté en tant que root."
-  else 
-    echo "L'utilisateur connecté est bien root." | tee -a "$LOG_FILE"
-  fi
-}
-
 # Fonction pour la gestion des erreurs
 function log_error {
     local MESSAGE="$1"
@@ -28,6 +19,15 @@ function log_error {
     echo "ERREUR [$TIMESTAMP]: $MESSAGE" >&2
     echo "ERREUR [$TIMESTAMP]: $MESSAGE" >> "$LOG_FILE"
     exit 1
+}
+
+# Vérification des privilèges de l'utilisateur
+check_root_user() {
+  if [[ $EUID -ne 0 ]]; then
+    log_error "Ce script doit être exécuté en tant que root."
+  else 
+    echo "L'utilisateur connecté est bien root." | tee -a "$LOG_FILE"
+  fi
 }
 
 # Vérification si le serveur NTP est déjà installé
@@ -162,6 +162,7 @@ check_root_user
 # Vérification si le serveur NTP est déjà installé avant de lancer une nouvelle installation
 if check_ntp_installed; then
   echo "Le serveur NTP est déjà installé." | tee -a "$LOG_FILE"
+  exit 0
 else
   echo "Installation du serveur NTP en cours..." | tee -a "$LOG_FILE"
   install_ntp
