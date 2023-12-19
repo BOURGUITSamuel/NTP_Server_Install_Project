@@ -19,7 +19,7 @@ Le programme a été conçu avec le language Bash
 
 1- Copiez le  programme dans le répertoire de votre choix
 
-2- Lancez le programme avec la commande suivante : "bash ntp_server_install.bash"
+2- Lancer le programme avec la commande suivante : "bash ntp_server_install.bash"
 
 3- Vous pouvez appliquer vos propres paramètres en modifiant le script
 
